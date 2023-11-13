@@ -1,0 +1,20 @@
+version: 0.0.1
+patterns:
+  - name: avoid_only
+    tags: ["style", "debugging"]
+    level: error
+    body: |
+      `$testlike.only` => `$testlike` where {
+        `$testlike` <: or {
+          `describe`
+          `it`
+          `test`
+        }
+      }
+    description: |
+      .only is usually a mistake left over from local debugging. Pushing it to
+      main risks false negatives on CI.
+  - name: disabled_pattern
+    level: none # This pattern is disabled
+    body: |
+      `something` => `somewhere`
